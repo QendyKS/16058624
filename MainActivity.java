@@ -1,43 +1,193 @@
 package com.example.mobilecomputingapp1;
 
-import androidx.appcompat.app.AppCompatActivity;
 import java.util.Random;
 
+import android.icu.number.Scale;
+import android.os.Bundle;
 import android.view.View;   //for view
+import android.content.Intent;
+
+import android.view.animation.RotateAnimation;
 import android.widget.ImageView;  //for linking the imageView object
 import android.view.MotionEvent;   //for drag and touch event
-import android.os.Bundle;
-import android.view.View;
+import android.widget.Button;
+import android.widget.TextView;
+
+import androidx.appcompat.app.AppCompatActivity;
+import android.view.animation.TranslateAnimation;
 import android.view.animation.AlphaAnimation;
 import android.view.animation.Animation;
 import android.view.animation.ScaleAnimation;
-import android.widget.Button;
-import android.widget.ImageView;
-import android.widget.TextView;
+import android.view.animation.RotateAnimation;
+
+import android.annotation.SuppressLint;
 
 
 public class MainActivity extends AppCompatActivity {
-    Random rand = new Random();
-    int left = rand.nextInt( 6);
-    int right = rand.nextInt( 5);
-    int sum = left + right;
 
-    public void questions (int total) {
-        int nom = total;
+    Vibrator vibrator;
+    TextView Questions;
+    AlphaAnimation alpha;
+    ScaleAnimation scale;
+    String questionsPhrase;
+    RotateAnimation rotate;
+    TranslateAnimation trans;
 
-        if (nom==sum){
-            TextView myTextView;
-            myTextView = findViewById(R.id.Question);
-            myTextView.setText(""+left+"+"+right+"="+nom);
+
+
+
+
+
+
+    public void correct(){
+
+        Button replayB = (Button) findViewById(R.id.Replay);
+        replayB.setVisibility(View.VISIBLE);
+        View greenBG = (View) findViewById(R.id.CorrectPage);
+        greenBG.setVisibility(View.VISIBLE);
+        ImageView s1 = findViewById(R.id.Star1);
+        s1.setVisibility(View.VISIBLE);
+        ImageView s2 = findViewById(R.id.Star2);
+        s2.setVisibility(View.VISIBLE);
+        View text = (View) findViewById(R.id.Congratulations);
+        text.setVisibility(View.VISIBLE);
+        ImageView thumb = findViewById(R.id.ThumbsUP);
+        thumb.setVisibility(View.VISIBLE);
+
+
+        Button btn0 = (Button) findViewById(R.id.Number0);
+        btn0.setVisibility(View.INVISIBLE);
+
+        Button btn1 = (Button) findViewById(R.id.Number1);
+        btn1.setVisibility(View.INVISIBLE);
+
+        Button btn2 = (Button) findViewById(R.id.Number2);
+        btn2.setVisibility(View.INVISIBLE);
+
+        Button btn3 = (Button) findViewById(R.id.Number3);
+        btn3.setVisibility(View.INVISIBLE);
+
+        Button btn4 = (Button) findViewById(R.id.Number4);
+        btn4.setVisibility(View.INVISIBLE);
+
+        Button btn5 = (Button) findViewById(R.id.Number5);
+        btn5.setVisibility(View.INVISIBLE);
+
+        Button btn6 = (Button) findViewById(R.id.Number6);
+        btn6.setVisibility(View.INVISIBLE);
+
+        Button btn7 = (Button) findViewById(R.id.Number7);
+        btn7.setVisibility(View.INVISIBLE);
+
+        Button btn8 = (Button) findViewById(R.id.Number8);
+        btn8.setVisibility(View.INVISIBLE);
+
+        Button btn9 = (Button) findViewById(R.id.Number9);
+        btn9.setVisibility(View.INVISIBLE);
+
+        View redBG = (View) findViewById(R.id.WrongScreen);
+
+        redBG.setVisibility(View.INVISIBLE);
+        Button rtBTN = findViewById(R.id.retry);
+        rtBTN.setVisibility(View.INVISIBLE);
+
+        ImageView apple1 = findViewById(R.id.Apple1);
+        apple1.setVisibility(View.INVISIBLE);
+
+        ImageView apple2 = findViewById(R.id.Apple2);
+        apple2.setVisibility(View.INVISIBLE);
+
+        ImageView apple3 = findViewById(R.id.Apple3);
+        apple3.setVisibility(View.INVISIBLE);
+
+        ImageView apple4 = findViewById(R.id.Apple4);
+        apple4.setVisibility(View.INVISIBLE);
+
+        ImageView apple5 = findViewById(R.id.Apple5);
+        apple5.setVisibility(View.INVISIBLE);
+
+        ImageView apple6 = findViewById(R.id.Apple6);
+        apple6.setVisibility(View.INVISIBLE);
+
+        ImageView apple7 = findViewById(R.id.Apple7);
+        apple7.setVisibility(View.INVISIBLE);
+
+        ImageView apple8 = findViewById(R.id.Apple8);
+        apple8.setVisibility(View.INVISIBLE);
+
+        ImageView apple9 = findViewById(R.id.Apple9);
+        apple9.setVisibility(View.INVISIBLE);
+
+        ImageView plate = findViewById(R.id.Plate1);
+        plate.setVisibility(View.INVISIBLE);
+
+        AlphaAnimation alpha;
+        alpha = new AlphaAnimation(0, 1);
+        alpha.setDuration(1000);
+        alpha.setRepeatCount(Animation.INFINITE);
+        greenBG.startAnimation(alpha);
+
+        RotateAnimation rotate;
+        RotateAnimation rotate2;
+        rotate = new RotateAnimation(0,1080);
+        rotate2 = new RotateAnimation(360,0);
+        rotate.setDuration(7000);
+        rotate2.setDuration(2000);
+        rotate.setRepeatCount(Animation.INFINITE);
+        rotate2.setRepeatCount(Animation.INFINITE);
+        s1.startAnimation(rotate);
+        s2.startAnimation(rotate2);
+
+        ScaleAnimation scale;
+        scale = new ScaleAnimation(0,1,0,1);
+        scale.setDuration(5000);
+        thumb.startAnimation(scale);
+
+    }
+
+    public void replyOnClick(View v ) {
+        Intent intent = getIntent();
+        finish();
+        startActivity(intent);
+    }
+
+    public void retryOnClick(View v)  {
+        Button pressed = (Button)v;
+
+        if (pressed != findViewById(R.id.Retry)) {
+            AlphaAnimation alpha;
+            alpha = new AlphaAnimation(1,0);
+            alpha.setDuration(500);
+            pressed.startAnimation(alpha);
+            pressed.setVisibility(View.INVISIBLE);
+        }else{
+            View redBG = (View) findViewById(R.id.WrongPage);
+            redBG.setVisibility(View.INVISIBLE);
+            Button rtBTN = findViewById(R.id.Retry);
+            rtBTN.setVisibility(View.INVISIBLE);
         }
 
-else {
+    }
 
-        TextView myTextView;
-        myTextView = findViewById(R.id.Question);
-        myTextView.setText(""+left+"+"+right+"=?");
+    public void ButtonOnClick(View v) {
+        Button pressed = (Button)v;
+        int answer = Integer.parseInt (pressed.getText().toString());
+
+        if (answer == sum) {
+            correct();
+            questions(sum);
+
+        }else{
+
+            retryOnClick(pressed);
+            View redBG = (View) findViewById(R.id.WrongPage);
+            redBG.setVisibility(View.VISIBLE);
+            Button rtBTN = findViewById(R.id.Retry);
+            rtBTN.setVisibility(View.VISIBLE);
+
         }
     }
+
 
 
 
